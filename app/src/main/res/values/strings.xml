@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AveineOuiProject</string>
+    <string name="app_name">AveineProjet</string>
+    <string name="flag_description">Boutton pour changer la langue</string>
 </resources>

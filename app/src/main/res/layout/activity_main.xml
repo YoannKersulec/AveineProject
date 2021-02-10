@@ -22,15 +22,17 @@
 
 
 
-    <Button
-        android:id="@+id/button_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteX="274dp"
-        tools:layout_editor_absoluteY="289dp" />
 
-
+    <ImageButton
+        android:id="@+id/change_lang"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_flag"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/flag_description"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
