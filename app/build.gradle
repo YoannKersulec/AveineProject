@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -48,7 +52,11 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
 
     implementation 'com.algolia:algoliasearch-android:3.+'
+    implementation 'com.algolia:instantsearch-android:2.8.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common:2.2.0"
 
     implementation "io.ktor:ktor-client-okhttp:1.5.0"
     testImplementation 'junit:junit:4.+'

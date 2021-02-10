@@ -15,6 +15,7 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,11 +46,13 @@ class MainActivity : AppCompatActivity() {
 
 
         val client = Client("K2D0OP514W", "b60053f6aaa8af7907113361b96ca52b")
-        val index = client.getIndex("prod_wines")
+        val index = client.getIndex("prod_domains")
         val completionHandler: CompletionHandler = object : CompletionHandler {
             override fun requestCompleted(content: JSONObject?, error: AlgoliaException?) {
                 // [...]
                 val result = content
+                val hits = result?.getJSONArray("hits")
+                val oui = 1
             }
             val out = "out"
         }
