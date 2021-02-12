@@ -14,6 +14,7 @@ import com.algolia.search.saas.Client
 import com.algolia.search.saas.CompletionHandler
 import com.algolia.search.saas.Query
 import org.json.JSONObject
+import retrofit2.Retrofit
 import java.util.*
 
 
@@ -30,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.change_lang)?.setOnClickListener{
             changeLanguageRestart()
         }
+        auth()
+    }
+
+    private fun auth() {
+        CallController().start()
+
     }
 
     private fun loadFragment(fragment : Fragment) {
