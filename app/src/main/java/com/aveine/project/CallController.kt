@@ -6,36 +6,55 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.function.Consumer
 
 
 class CallController : Callback<TokenClass> {
+
+    var aveineService : AveineService? = null
+
+    var token : String? = null
 
     fun start() {
         val gson = GsonBuilder()
                 .setLenient()
                 .create()
         val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(AUTH_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
-        val aveineAPI: AveineOauthService = retrofit.create(AveineOauthService::class.java)
+        aveineService = retrofit.create(AveineService::class.java)
+        auth()
+    }
+
+    fun auth() {
         val body = AuthClass(
             client_id = "nLk99G06VJIJQj7ZWYjxlhPOcRDk3LsC",
-            client_secret = "g5FFoqeO9vwcy8QfyCW_pJjkNqPpjbsMaAJ84KjYo_6Vl8SFpJ8mB5crMGgzAz0",
-                audience = "api.aveine.paris",
-                grant_type = "client_credentials"
+            client_secret = "g5FFoqeO9vwcy8QfyC-W_pJjkNqPpjbsMaAJ84KjYo_6Vl8SFpJ8mB5crMGgzAz0",
+            audience = "api.aveine.paris",
+            grant_type = "client_credentials"
         )
-        val call: Call<TokenClass> = aveineAPI.auth(body)
-        call.enqueue(this)
+        val call: Call<TokenClass>? = aveineService?.auth(body)
+        call?.enqueue(this)
+    }
+
+    fun changeUrlAndService() {
+        val gson = GsonBuilder()
+            .setLenient()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        aveineService = retrofit.create(AveineService::class.java)
     }
 
     override fun onResponse(call: Call<TokenClass>?, response: Response<TokenClass>) {
-        if (response.isSuccessful()) {
+        if (response.isSuccessful) {
             val body = response.body()
+            changeUrlAndService()
+            token = body?.access_token
             val oui = 1
-//            val changesList: List<Change> = response.body()
-//            changesList.forEach(Consumer<Change> { change: Change -> System.out.println(change.subject) })
         } else {
             System.out.println(response.errorBody())
         }
@@ -46,6 +65,7 @@ class CallController : Callback<TokenClass> {
     }
 
     companion object {
+        const val AUTH_URL = "https://aveine.eu.auth0.com/"
         const val BASE_URL = "https://v2.consumer.api.aveine.paris/"
     }
 }

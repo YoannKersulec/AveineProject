@@ -14,11 +14,16 @@ import com.algolia.search.saas.Client
 import com.algolia.search.saas.CompletionHandler
 import com.algolia.search.saas.Query
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    var callController : CallController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +36,27 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.change_lang)?.setOnClickListener{
             changeLanguageRestart()
         }
+        findViewById<ImageButton>(R.id.favorite_btn)?.setOnClickListener {
+            getFavorite()
+        }
         auth()
     }
 
     private fun auth() {
-        CallController().start()
+        callController = CallController()
+        callController?.start()
+    }
 
+    fun getFavorite() {
+        val call: Call<FavoriteWineListClass>? = callController?. aveineService?.getFavorites("Bearer " + callController?.token)
+        call?.enqueue(object : Callback<FavoriteWineListClass> {
+            override fun onResponse(call: Call<FavoriteWineListClass>, response: Response<FavoriteWineListClass>) {
+                val allCourse = response.body()
+            }
+            override fun onFailure(call: Call<FavoriteWineListClass>, t: Throwable) {
+                val ouoi = 1
+            }
+        })
     }
 
     private fun loadFragment(fragment : Fragment) {

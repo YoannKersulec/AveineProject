@@ -34,4 +34,15 @@
         android:contentDescription="@string/flag_description"
         />
 
+    <ImageButton
+        android:id="@+id/favorite_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:contentDescription="@string/favorite_description"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

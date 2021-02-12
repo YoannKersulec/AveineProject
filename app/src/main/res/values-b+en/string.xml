@@ -3,4 +3,5 @@
     <string name="app_name">AveineProject</string>
     <string name="flag_description">Button for change language</string>
     <string name="label_description">Image corresponding to the label wine</string>
+    <string name="favorite_description">Button for filtering per favorite</string>
 </resources>
