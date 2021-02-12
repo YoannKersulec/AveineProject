@@ -6,6 +6,9 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.algolia.search.saas.AlgoliaException
 import com.algolia.search.saas.Client
 import com.algolia.search.saas.CompletionHandler
@@ -20,56 +23,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+        loadFragment(WineListFragment.newInstance())
     }
 
     private fun init() {
         findViewById<ImageButton>(R.id.change_lang)?.setOnClickListener{
             changeLanguageRestart()
         }
-/*        val client = ClientSearch(
-                applicationID = ApplicationID("K2D0OP514W"),
-                apiKey = APIKey("b60053f6aaa8af7907113361b96ca52b")
-        )*/
+    }
 
-
-
-/*        GlobalScope.launch {
-            val indices = client.listIndices()
-            println(indices)
-            val oui = indices
-        }*/
-//        backgroundTest(index)
-
-
-
-
-
-
-        val client = Client("K2D0OP514W", "b60053f6aaa8af7907113361b96ca52b")
-        val index = client.getIndex("prod_domains")
-        val completionHandler: CompletionHandler = object : CompletionHandler {
-            override fun requestCompleted(content: JSONObject?, error: AlgoliaException?) {
-                // [...]
-                val result = content
-                val hits = result?.getJSONArray("hits")
-                val oui = 1
-            }
-            val out = "out"
-        }
-//        val response = index.search()
-
-//        val contacts: List<WineClass> = response.hits.deserialize(WineClass.serializer())
-//        index.getObject(ObjectID("vine"))
-        val query = Query("")
-//            .setAttributesToRetrieve("first", "lastname")
-            .setHitsPerPage(50);
-        index.searchAsync(query, completionHandler);
-//        index.getSettingsAsync(completionHandler)*/
-
-//        val indexName = IndexName("prod_wines")
- //       val index: ResponseFields.Index = client.getIndex("your_index_name")
-
-//        response.hits.deserialize(Contact.serializer())
+    private fun loadFragment(fragment : Fragment) {
+// create a FragmentManager
+        var fm : FragmentManager = supportFragmentManager
+// create a FragmentTransaction to begin the transaction and replace the Fragment
+        var fragmentTransaction : FragmentTransaction = fm.beginTransaction();
+// replace the FrameLayout with new Fragment
+        fragmentTransaction.replace(R.id.fragment_holder, fragment);
+        fragmentTransaction.commit(); // save the changes
     }
 
     // Need to fix cause Deprecated but didn't find anything else except : https://stackoverflow.com/a/40704077

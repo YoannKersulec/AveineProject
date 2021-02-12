@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AveineProjet</string>
     <string name="flag_description">Boutton pour changer la langue</string>
+    <string name="label_description">Image correspondant au label du vin</string>
 </resources>

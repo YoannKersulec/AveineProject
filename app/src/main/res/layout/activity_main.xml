@@ -16,13 +16,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_wine"
+    <FrameLayout
+        android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
+        android:layout_height="match_parent">
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/change_lang"

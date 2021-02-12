@@ -1,12 +1,17 @@
 package com.aveine.project
 
-data class WineClass(
-    val type: String,
-    val attributes: Attribute
-)
+import com.google.gson.Gson
+import kotlinx.serialization.Serializable
 
-data class Attribute(
-    val id : String?,
-    val designation : String?,
-    val color : String?
-)
+@Serializable
+data class WineClass(
+    val id : String? = null,
+    val designation : String? = null,
+    val color : ColorClass? = null,
+    val wine_label : String? = null
+) {
+    fun createFromJson(json : String) : WineClass {
+        val gson = Gson()
+        return gson.fromJson(json, WineClass::class.java)
+    }
+}
