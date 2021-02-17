@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
@@ -39,6 +40,15 @@ class WineListFragment : Fragment() {
         callForData("")
     }
 
+    fun updateList(newList : ArrayList<WineClass>) {
+        if (newList.size == 0) {
+            this.activity?.findViewById<TextView>(R.id.no_wine_text)?.visibility = View.VISIBLE
+        }
+        dataWine = newList
+        adapter?.updateData(dataWine)
+        adapter?.notifyDataSetChanged()
+    }
+
     fun callForData(designation: String) {
         val client = Client("K2D0OP514W", "b60053f6aaa8af7907113361b96ca52b")
         val index = client.getIndex("prod_wines")
@@ -52,9 +62,7 @@ class WineListFragment : Fragment() {
                 for (i in 0 until hits.length()) {
                     arrObj.add(WineClass().createFromJson(hits.getString(i)))
                 }
-                dataWine = arrObj
-                adapter?.updateData(dataWine)
-                adapter?.notifyDataSetChanged()
+                updateList(arrObj)
             }
         }
         val query = Query(designation)

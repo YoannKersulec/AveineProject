@@ -4,4 +4,8 @@
     <string name="flag_description">Button for change language</string>
     <string name="label_description">Image corresponding to the label wine</string>
     <string name="favorite_description">Button for filtering per favorite</string>
+    <string name="description_text">Description :</string>
+    <string name="serv_temp">Need to be served between </string>
+    <string name="advice_text">Advice :</string>
+    <string name="no_wine">No wine found</string>
 </resources>

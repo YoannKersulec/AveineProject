@@ -39,15 +39,6 @@ class WineDetailsFragment : Fragment() {
         val oui = 1
     }
 
-    @Suppress("UNCHECKED_CAST")
-    fun <R> readInstanceProperty(instance: Any, propertyName: String): R {
-        val property = instance::class.members
-                // don't cast here to <Any, R>, it would succeed silently
-                .first { it.name == propertyName } as KProperty1<Any, *>
-        // force a invalid cast exception if incorrect type here
-        return property.get(instance) as R
-    }
-
     private fun init(view: View, wine: WineClass?) {
         if (wine == null)
             return
@@ -73,5 +64,9 @@ class WineDetailsFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.return_btn).setOnClickListener {
             (activity as MainActivity?)?.changeFragment()
         }
+        val serv_text = "${this.context?.getString(R.string.serv_temp)} ${wine.serving_temperature_min} - ${wine.serving_temperature_max} degree"
+        view.findViewById<TextView>(R.id.serv_temp_text).text = serv_text
+
+
     }
 }

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/container"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
     <ImageView
@@ -40,6 +41,8 @@
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
+            android:src="@drawable/ic_fav"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:contentDescription="@string/favorite_description"
@@ -61,13 +64,13 @@
         <ImageButton
             android:id="@+id/change_lang"
             android:layout_width="0px"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:src="@drawable/ic_flag"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/white"
+            android:layout_marginTop="5dp"
             android:contentDescription="@string/flag_description"
             />
 

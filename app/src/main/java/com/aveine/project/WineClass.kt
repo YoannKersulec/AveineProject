@@ -15,7 +15,9 @@ data class WineClass(
     val vintage : Int? = null,
     val recommended_aeration : Int? = null,
     val region : RegionClass? = null,
-    val country : CountryClass? = null
+    val country : CountryClass? = null,
+    val serving_temperature_min : Int? = null,
+    val serving_temperature_max : Int? = null,
 ) : Parcelable {
 
     fun createFromJson(json : String) : WineClass {

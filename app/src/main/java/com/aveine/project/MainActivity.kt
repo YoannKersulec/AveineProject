@@ -1,17 +1,16 @@
 package com.aveine.project
 
 import android.app.Activity
-import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -51,7 +50,6 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
         val label_text : EditText = findViewById(R.id.label_search)
          label_text.setOnEditorActionListener { v, keyCode, event ->
             val handled = false
-//            Toast.makeText(this, event.keyCode, Toast.LENGTH_SHORT).show()
             if (keyCode == EditorInfo.IME_ACTION_SEARCH ||
                     keyCode == EditorInfo.IME_ACTION_DONE ||
                     event.action == KeyEvent.ACTION_DOWN &&
@@ -60,10 +58,14 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
                 label_text.setText("")
                 label_text.clearFocus()
                 hideKeyboard(this)
-                //Perform your Actions here.
             }
             handled
         }
+/*        label_text.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                hideKeyboard(this)
+            }
+        }*/
         auth()
     }
 
@@ -86,7 +88,10 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
     fun getFavorite() {
         val call: Call<FavoriteWineListClass>? = callController?. aveineService?.getFavorites("Bearer " + callController?.token)
         call?.enqueue(object : Callback<FavoriteWineListClass> {
-            override fun onResponse(call: Call<FavoriteWineListClass>, response: Response<FavoriteWineListClass>) {
+            override fun onResponse(
+                call: Call<FavoriteWineListClass>,
+                response: Response<FavoriteWineListClass>
+            ) {
                 val allCourse = response.body()
             }
 
@@ -97,15 +102,31 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
     }
 
     override fun forwardClick(element: WineClass?) {
+        setVisibility(wineDetailsFragment)
         loadFragmentWithArgument(wineDetailsFragment, element)
+    }
+
+    fun setVisibility(fragment: Fragment?) {
+        if (fragment == wineDetailsFragment) {
+            findViewById<ImageButton>(R.id.favorite_btn).visibility = View.GONE
+            findViewById<EditText>(R.id.label_search).visibility = View.GONE
+        }
+        else {
+            findViewById<ImageButton>(R.id.favorite_btn).visibility = View.VISIBLE
+            findViewById<EditText>(R.id.label_search).visibility = View.VISIBLE
+        }
 
     }
 
     fun changeFragment() {
-        if (current == wineDetailsFragment)
+        if (current == wineDetailsFragment) {
+            setVisibility(wineListFragment)
             loadFragment(wineListFragment)
-        else
+        }
+        else {
+            setVisibility(wineDetailsFragment)
             loadFragment(wineDetailsFragment)
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -119,7 +140,7 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
         current = fragment
     }
 
-    private fun loadFragmentWithArgument(fragment: Fragment, arg : WineClass?) {
+    private fun loadFragmentWithArgument(fragment: Fragment, arg: WineClass?) {
         val bundle = Bundle()
         bundle.putParcelable("wine", arg)
         val transaction = this.supportFragmentManager.beginTransaction()

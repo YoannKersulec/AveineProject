@@ -3,4 +3,8 @@
     <string name="flag_description">Boutton pour changer la langue</string>
     <string name="label_description">Image correspondant au label du vin</string>
     <string name="favorite_description">Boutton pour filtrer par favoris</string>
+    <string name="description_text">Description :</string>
+    <string name="serv_temp">A servir entre </string>
+    <string name="advice_text">Conseil :</string>
+    <string name="no_wine">Aucun vin de trouvé</string>
 </resources>
