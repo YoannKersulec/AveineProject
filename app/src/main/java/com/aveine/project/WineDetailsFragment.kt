@@ -14,8 +14,6 @@ import kotlin.reflect.KProperty1
 
 class WineDetailsFragment : Fragment() {
 
-    var listener: FragmentActivity? = null
-
     companion object {
         fun newInstance(): WineDetailsFragment = WineDetailsFragment()
     }
@@ -33,10 +31,8 @@ class WineDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
-        val data: WineClass? by lazy { arguments?.getParcelable("wine") as WineClass? }
         val wine = arguments?.getParcelable("wine") as WineClass?
         init(view, wine)
-        val oui = 1
     }
 
     private fun init(view: View, wine: WineClass?) {
@@ -60,13 +56,13 @@ class WineDetailsFragment : Fragment() {
         val label = view.findViewById<ImageView>(R.id.label_detail)
         Picasso.get().load(wine.wine_label).into(label)
         val aeration = view.findViewById<TextView>(R.id.aeration_text)
-        aeration.text = wine.recommended_aeration.toString()
+        aeration.text = "${this.context?.getString(R.string.aeration)} ${wine.recommended_aeration.toString()}"
         view.findViewById<ImageButton>(R.id.return_btn).setOnClickListener {
             (activity as MainActivity?)?.changeFragment()
         }
         val serv_text = "${this.context?.getString(R.string.serv_temp)} ${wine.serving_temperature_min} - ${wine.serving_temperature_max} degree"
         view.findViewById<TextView>(R.id.serv_temp_text).text = serv_text
-
-
+        val vintage = view.findViewById<TextView>(R.id.vintage_text)
+        vintage.text = wine.vintage.toString()
     }
 }

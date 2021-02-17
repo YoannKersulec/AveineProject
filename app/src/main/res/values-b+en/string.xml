@@ -8,4 +8,8 @@
     <string name="serv_temp">Need to be served between </string>
     <string name="advice_text">Advice :</string>
     <string name="no_wine">No wine found</string>
+    <string name="color">Color :</string>
+    <string name="vintage">Vintage :</string>
+    <string name="from">From :</string>
+    <string name="aeration">Recommended aeration of </string>
 </resources>

@@ -10,8 +10,9 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
+            android:paddingStart="10dp"
             android:orientation="vertical">
 
             <ImageButton
@@ -37,7 +38,28 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:text="@string/color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
                 android:id="@+id/color_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vintage"/>
+
+            <TextView
+                android:id="@+id/vintage_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:text="@string/from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -55,11 +77,9 @@
 
         <ImageView
             android:id="@+id/label_detail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerInside"
-            android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"/>
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 
@@ -72,23 +92,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/advice_text"/>
+            android:text="@string/advice_text"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/aeration_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/serv_temp_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="clip_horizontal"/>
+            android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@color/white"
+        android:src="@drawable/ic_unfav"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

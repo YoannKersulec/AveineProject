@@ -15,8 +15,6 @@ class WineListAdapter(private var wineList : ArrayList<WineClass>, context: Cont
     private val clickHandler : ClickEventHandler = context as ClickEventHandler
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-        }
         fun bind(element : WineClass?) {
             itemView.setOnClickListener {
                 clickHandler.forwardClick(element)

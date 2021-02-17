@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algolia.search.saas.AlgoliaException
@@ -54,14 +53,12 @@ class WineListFragment : Fragment() {
         val index = client.getIndex("prod_wines")
         val completionHandler: CompletionHandler = object : CompletionHandler {
             override fun requestCompleted(content: JSONObject?, error: AlgoliaException?) {
-                val result = content
-                val hits = result?.getJSONArray("hits")
+                val hits = content?.getJSONArray("hits")
                 val arrObj = arrayListOf<WineClass>()
                 if (hits == null)
                     return
-                for (i in 0 until hits.length()) {
+                for (i in 0 until hits.length())
                     arrObj.add(WineClass().createFromJson(hits.getString(i)))
-                }
                 updateList(arrObj)
             }
         }
@@ -76,7 +73,6 @@ class WineListFragment : Fragment() {
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         init()
         val wineList = view.findViewById<RecyclerView>(R.id.list_wine)
         adapter = WineListAdapter(dataWine, requireContext())

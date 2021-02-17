@@ -10,6 +10,11 @@ interface AveineService {
 
     @Headers(
         "Content-Type: application/json")
-        @GET("/users/self/favorites")
-        fun getFavorites(@Header("Authorization") authHeader : String) : Call<FavoriteWineListClass>
+    @GET("/users/self/favorites")
+    fun getFavorites(@Header("Authorization") authHeader : String) : Call<FavoriteWineListClass>
+
+    @Headers(
+        "Content-Type: application/json")
+    fun addFavorite(@Header("Authorization") authHeader : String, @Body favoriteWineClass: FavoriteWineClass) : Call<FavoriteWineClass>
+
 }

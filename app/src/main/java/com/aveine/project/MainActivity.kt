@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,6 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() , ClickEventHandler {
@@ -61,11 +63,6 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
             }
             handled
         }
-/*        label_text.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                hideKeyboard(this)
-            }
-        }*/
         auth()
     }
 
@@ -92,11 +89,16 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
                 call: Call<FavoriteWineListClass>,
                 response: Response<FavoriteWineListClass>
             ) {
-                val allCourse = response.body()
+                val allfav = response.body()?.data
+                val favorites = arrayListOf<WineClass>()
+                for (i in 0 until (allfav?.size ?: 0)) {
+                    favorites.add(WineClass(allfav?.get(i)?.id))
+                }
+                //wineListFragment.updateList(favorites)
             }
 
             override fun onFailure(call: Call<FavoriteWineListClass>, t: Throwable) {
-                val ouoi = 1
+                Toast.makeText(this@MainActivity, "Can't get favorites", Toast.LENGTH_LONG).show()
             }
         })
     }
