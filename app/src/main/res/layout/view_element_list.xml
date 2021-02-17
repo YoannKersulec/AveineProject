@@ -46,6 +46,11 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/id_wine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
                 android:id="@+id/vintage_wine_element"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"

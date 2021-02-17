@@ -39,6 +39,12 @@ class WineListFragment : Fragment() {
         callForData("")
     }
 
+    fun addToList(wine : WineClass) {
+        dataWine.add(wine)
+        adapter?.updateData(dataWine)
+        adapter?.notifyDataSetChanged()
+    }
+
     fun updateList(newList : ArrayList<WineClass>) {
         if (newList.size == 0) {
             this.activity?.findViewById<TextView>(R.id.no_wine_text)?.visibility = View.VISIBLE

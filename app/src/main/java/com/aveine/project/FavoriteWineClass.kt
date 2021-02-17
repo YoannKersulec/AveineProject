@@ -1,8 +1,9 @@
 package com.aveine.project
 
 data class FavoriteWineClass(
-    val type : String?,
-    val id : String?,
-    val attributes : AttributeFavoriteClass?
+    val type : String? = null,
+    val id : String? = null,
+    val attributes : AttributeFavoriteClass? = null,
+    val relationships : RelationShipClass? = null
 )
 

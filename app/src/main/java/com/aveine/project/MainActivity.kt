@@ -82,22 +82,66 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
         callController?.start()
     }
 
+    fun getInfoWine(id : String?) {
+        if (id == null)
+            return
+        val call: Call<WineGetClass>? = callController?.aveineService?.getInfoWine("Bearer " + callController?.token, id = id)
+        call?.enqueue(object : Callback<WineGetClass> {
+            override fun onResponse(
+                call: Call<WineGetClass>,
+                response: Response<WineGetClass>
+            ) {
+                val data = response.body()?.data
+                val attributes = data?.attributes
+                val newWine = response.body()?.createWineClass() ?: return
+                wineListFragment.addToList(newWine)
+            }
+
+            override fun onFailure(call: Call<WineGetClass>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "Can't get info", Toast.LENGTH_LONG).show()
+            }
+        })
+
+    }
+
     fun getFavorite() {
-        val call: Call<FavoriteWineListClass>? = callController?. aveineService?.getFavorites("Bearer " + callController?.token)
+        val call: Call<FavoriteWineListClass>? = callController?.aveineService?.getFavorites("Bearer " + callController?.token)
         call?.enqueue(object : Callback<FavoriteWineListClass> {
             override fun onResponse(
                 call: Call<FavoriteWineListClass>,
                 response: Response<FavoriteWineListClass>
             ) {
                 val allfav = response.body()?.data
-                val favorites = arrayListOf<WineClass>()
+                wineListFragment.dataWine.clear()
                 for (i in 0 until (allfav?.size ?: 0)) {
-                    favorites.add(WineClass(allfav?.get(i)?.id))
+                    getInfoWine(allfav?.get(i)?.relationships?.wine?.data?.id)
                 }
-                //wineListFragment.updateList(favorites)
             }
 
             override fun onFailure(call: Call<FavoriteWineListClass>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "Can't get favorites", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    fun addToFavorite(wineClass: WineClass) {
+        val favoriteAddWineClass = FavoriteAddWineClass(data =
+            FavoriteWineClass(type = "favorites", relationships =
+                RelationShipClass(wine = BasicWineClass(data = BasicInfoClass(id = wineClass.id, type = "wines")))
+            )
+        )
+        val call: Call<FavoriteAddWineClass>? =
+            callController?.aveineService?.addFavorite("Bearer " + callController?.token, favoriteAddWineClass)
+        call?.enqueue(object : Callback<FavoriteAddWineClass> {
+            override fun onResponse(
+                call: Call<FavoriteAddWineClass>,
+                response: Response<FavoriteAddWineClass>
+            ) {
+                val allfav = response.body()?.data
+                //wineListFragment.addToList(favorites)
+            }
+
+            override fun onFailure(call: Call<FavoriteAddWineClass>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "Can't get favorites", Toast.LENGTH_LONG).show()
             }
         })

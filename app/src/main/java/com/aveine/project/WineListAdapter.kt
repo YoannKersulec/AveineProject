@@ -19,6 +19,7 @@ class WineListAdapter(private var wineList : ArrayList<WineClass>, context: Cont
             itemView.setOnClickListener {
                 clickHandler.forwardClick(element)
             }
+            itemView.findViewById<TextView>(R.id.id_wine).text = element?.id
             itemView.findViewById<TextView>(R.id.vintage_wine_element).text = element?.vintage.toString()
             itemView.findViewById<TextView>(R.id.designation_wine_element).text = element?.designation
             Picasso.get().load(element?.wine_label).into(itemView.findViewById<ImageView>(R.id.label_wine_element))

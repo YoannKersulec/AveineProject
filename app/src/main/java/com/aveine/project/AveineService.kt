@@ -14,7 +14,13 @@ interface AveineService {
     fun getFavorites(@Header("Authorization") authHeader : String) : Call<FavoriteWineListClass>
 
     @Headers(
+        "Content-Type: application/vnd.api+json")
+    @POST("/users/self/favorites")
+    fun addFavorite(@Header("Authorization") authHeader : String, @Body favoriteWineAddClass: FavoriteAddWineClass) : Call<FavoriteAddWineClass>
+
+    @Headers(
         "Content-Type: application/json")
-    fun addFavorite(@Header("Authorization") authHeader : String, @Body favoriteWineClass: FavoriteWineClass) : Call<FavoriteWineClass>
+    @GET("/wines/{id}")
+    fun getInfoWine(@Header("Authorization") authHeader : String, @Path("id")id: String ) : Call<WineGetClass>
 
 }

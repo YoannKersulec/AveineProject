@@ -64,5 +64,8 @@ class WineDetailsFragment : Fragment() {
         view.findViewById<TextView>(R.id.serv_temp_text).text = serv_text
         val vintage = view.findViewById<TextView>(R.id.vintage_text)
         vintage.text = wine.vintage.toString()
+        view.findViewById<ImageButton>(R.id.fav_btn).setOnClickListener {
+            (activity as MainActivity?)?.addToFavorite(wine)
+        }
     }
 }
