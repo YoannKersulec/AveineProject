@@ -24,14 +24,20 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() , ClickEventHandler {
 
-    var callController : CallController? = null
     var wineListFragment : WineListFragment = WineListFragment.newInstance()
     var wineDetailsFragment : WineDetailsFragment = WineDetailsFragment.newInstance()
+    var current : Fragment? = null
+    var callController : CallController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+        loadFragment(wineListFragment)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
         loadFragment(wineListFragment)
     }
 
@@ -43,7 +49,7 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
             getFavorite()
         }
         val label_text : EditText = findViewById(R.id.label_search)
-        label_text.setOnEditorActionListener { v, keyCode, event ->
+         label_text.setOnEditorActionListener { v, keyCode, event ->
             val handled = false
 //            Toast.makeText(this, event.keyCode, Toast.LENGTH_SHORT).show()
             if (keyCode == EditorInfo.IME_ACTION_SEARCH ||
@@ -91,19 +97,15 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
     }
 
     override fun forwardClick(element: WineClass?) {
-        val test = element
-        val oui = 1
+        loadFragmentWithArgument(wineDetailsFragment, element)
 
-        val bundle = Bundle()
-        bundle.putParcelable("wine", element)
+    }
 
-        val transaction = this.supportFragmentManager.beginTransaction()
-        wineDetailsFragment.arguments = bundle
-
-        transaction.replace(R.id.fragment_holder, wineDetailsFragment)
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.commit()
+    fun changeFragment() {
+        if (current == wineDetailsFragment)
+            loadFragment(wineListFragment)
+        else
+            loadFragment(wineDetailsFragment)
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -114,6 +116,19 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
 // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(R.id.fragment_holder, fragment);
         fragmentTransaction.commit(); // save the changes
+        current = fragment
+    }
+
+    private fun loadFragmentWithArgument(fragment: Fragment, arg : WineClass?) {
+        val bundle = Bundle()
+        bundle.putParcelable("wine", arg)
+        val transaction = this.supportFragmentManager.beginTransaction()
+        wineDetailsFragment.arguments = bundle
+        transaction.replace(R.id.fragment_holder, fragment)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
+        current = fragment
     }
 
     // Need to fix cause Deprecated but didn't find anything else except : https://stackoverflow.com/a/40704077

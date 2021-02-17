@@ -54,7 +54,6 @@ class CallController : Callback<TokenClass> {
             val body = response.body()
             changeUrlAndService()
             token = body?.access_token
-            val oui = 1
         } else {
             System.out.println(response.errorBody())
         }
