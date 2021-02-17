@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algolia.search.saas.AlgoliaException
@@ -35,10 +36,10 @@ class WineListFragment : Fragment() {
     }
 
     private fun init() {
-        callForData()
+        callForData("")
     }
 
-    private fun callForData() {
+    fun callForData(designation: String) {
         val client = Client("K2D0OP514W", "b60053f6aaa8af7907113361b96ca52b")
         val index = client.getIndex("prod_wines")
         val completionHandler: CompletionHandler = object : CompletionHandler {
@@ -54,14 +55,14 @@ class WineListFragment : Fragment() {
                 dataWine = arrObj
                 adapter?.updateData(dataWine)
                 adapter?.notifyDataSetChanged()
-
             }
         }
-        val query = Query("")
+        val query = Query(designation)
             .setPage(0)
             .setHitsPerPage(50);
         index.searchAsync(query, completionHandler);
     }
+
 
     // This event is triggered soon after onCreateView().
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
@@ -70,10 +71,9 @@ class WineListFragment : Fragment() {
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         init()
         val wineList = view.findViewById<RecyclerView>(R.id.list_wine)
-        adapter = WineListAdapter(dataWine)
+        adapter = WineListAdapter(dataWine, requireContext())
         wineList?.adapter = adapter
         wineList?.layoutManager = LinearLayoutManager(listener)
-
     }
 
 }

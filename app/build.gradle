@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
+
 }
 
 android {
@@ -67,6 +69,12 @@ dependencies {
 
     // For image
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+/*    //Parcelize
+
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'*/
+    apply plugin: 'kotlin-parcelize'
 
     // Retro compatibility
     implementation "io.ktor:ktor-client-okhttp:1.5.1"

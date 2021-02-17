@@ -22,27 +22,57 @@
         android:layout_height="match_parent">
     </FrameLayout>
 
-    <ImageButton
-        android:id="@+id/change_lang"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_flag"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:contentDescription="@string/flag_description"
-        />
-
-    <ImageButton
-        android:id="@+id/favorite_btn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#f8f9f9"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:contentDescription="@string/favorite_description"
-        />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <ImageButton
+            android:id="@+id/favorite_btn"
+            android:layout_width="0px"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:contentDescription="@string/favorite_description"
+            />
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:background="#ebf5fb"
+            android:layout_weight="3">
+
+            <EditText
+                android:id="@+id/label_search"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/change_lang"
+            android:layout_width="0px"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_flag"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:contentDescription="@string/flag_description"
+            />
+
+
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
