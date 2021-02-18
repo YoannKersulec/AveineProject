@@ -12,4 +12,7 @@
     <string name="vintage">Vintage :</string>
     <string name="from">From :</string>
     <string name="aeration">Recommended aeration of </string>
+    <string name="add_fav_success">Add to favorites done</string>
+    <string name="add_fav_fail">Fail to add to favorites</string>
+
 </resources>

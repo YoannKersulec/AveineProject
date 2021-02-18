@@ -138,12 +138,12 @@ class MainActivity : AppCompatActivity() , ClickEventHandler {
                 response: Response<FavoriteAddWineClass>
             ) {
                 val allfav = response.body()?.data
+                Toast.makeText(this@MainActivity, getString(R.string.add_fav_success), Toast.LENGTH_SHORT).show()
                 //wineListFragment.addToList(favorites)
             }
 
             override fun onFailure(call: Call<FavoriteAddWineClass>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Can't get favorites", Toast.LENGTH_LONG).show()
-            }
+                Toast.makeText(this@MainActivity, getString(R.string.add_fav_fail), Toast.LENGTH_SHORT).show()            }
         })
     }
 

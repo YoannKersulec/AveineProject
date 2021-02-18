@@ -11,4 +11,6 @@
     <string name="vintage">Millésime :</string>
     <string name="from">De :</string>
     <string name="aeration">Aération recommandée de </string>
+    <string name="add_fav_success">Ajout au favoris réussi</string>
+    <string name="add_fav_fail">Erreur lors de l\'ajout aux favoris</string>
 </resources>

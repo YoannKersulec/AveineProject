@@ -56,7 +56,7 @@ class CallController : Callback<TokenClass> {
             token = body?.access_token
         } else {
             token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdmVpbmUucGFyaXMiLCJpYXQiOjE2MTM0NjU4MTksImV4cCI6MTYxNjU1MjIxOSwiYXVkIjoiYXBpLmF2ZWluZS5wYXJpcyIsInN1YiI6ImI2NjZkMWU2LWZlMWUtNGQyZi1iYTYwLWM2ODEzMDBjNzc5ZiJ9.IHAeSvZ933L8E-q8Go5mqBXpjMAIdJb9iRIHwH8_VYo"
-            // Need to fix that
+            // TODO Need to fix that
             changeUrlAndService()
             System.out.println(response.errorBody())
         }
